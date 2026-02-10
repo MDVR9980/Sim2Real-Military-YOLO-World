@@ -1,58 +1,64 @@
 """
 Main Application Entry Point.
 
-This script provides a Command Line Interface (CLI) to orchestrate the entire
-Sim-to-Real Military Object Detection pipeline. It allows the user to execute
-individual steps (Data Prep, Training, Evaluation) sequentially.
+This script acts as the central command hub for the Sim2Real Military Object Detection project.
+It allows sequential execution of the pipeline:
+1. Organize Data
+2. Configure
+3. Train (Sim-to-Real)
+4. Evaluate (Real Test)
+5. Visualize Reports
 """
 
 import os
 import sys
+from pathlib import Path
 
 def main():
-    """Displays the interactive menu and executes selected modules."""
     while True:
-        print("\n" + "="*60)
-        print(" 🚀 Sim2Real Military Detection System - Control Panel")
-        print("="*60)
-        print(" 1. [Data Prep]  Convert XML to YOLO Format & Generate Config")
-        print(" 2. [Train]      Start Sim-to-Real Domain Adaptation")
-        print(" 3. [Eval]       Evaluate Model Metrics (mAP)")
-        print(" 4. [Visuals]    Generate Training Reports & Plots")
-        print(" 5. [Demo]       Run Visual Comparison (Zero-Shot vs Tuned)")
-        print(" 0. [Exit]       Close Application")
-        print("-" * 60)
+        print("\n" + "="*50)
+        print(" 🛡️  Sim2Real YOLO-World Project Manager")
+        print("="*50)
+        print(" 1. [Setup] Organize Dataset (Prof's Data)")
+        print(" 2. [Setup] Generate YAML Configuration")
+        print(" 3. [Run]   Start Training (RTX 5080 Mode)")
+        print(" 4. [Test]  Evaluate on Real-World Test Set")
+        print(" 5. [Rep]   Generate Visual Reports")
+        print(" 0. [Exit]  Quit")
+        print("-" * 50)
         
-        choice = input(" Enter your choice (0-5): ").strip()
-        
+        choice = input("Select an option (0-5): ").strip()
+
         if choice == '0':
-            print("Exiting application. Goodbye!")
-            break
-            
+            print("Exiting...")
+            sys.exit()
+
         elif choice == '1':
-            print("\n>>> Step 1: Initializing Data Preparation...")
-            os.system("python src/dataset_prep.py")
-            print("\n>>> Generating YOLO Configuration...")
-            os.system("python src/create_yaml.py")
-            
+            print("\n>>> Organizing Dataset...")
+            os.system("python src/organize_dataset.py")
+
         elif choice == '2':
-            print("\n>>> Step 2: Starting Training Pipeline...")
-            os.system("python src/train_domain_adapt.py")
-            
+            print("\n>>> Creating Data Config...")
+            os.system("python src/create_yaml.py")
+
         elif choice == '3':
-            print("\n>>> Step 3: Running Evaluation...")
-            os.system("python src/evaluate.py")
-            
+            print("\n>>> WARNING: This starts heavy training.")
+            confirm = input("Are you ready? (y/n): ")
+            if confirm.lower() == 'y':
+                os.system("python src/train_domain_adapt.py")
+
         elif choice == '4':
-            print("\n>>> Step 4: Organizing Visuals...")
-            os.system("python src/visualize.py")
-            
+            print("\n>>> Running Final Evaluation...")
+            os.system("python src/evaluate.py")
+
         elif choice == '5':
-            print("\n>>> Step 5: Running Demo Comparison...")
-            os.system("python compare_results.py")
-            
+            print("\n>>> Generating Charts and Figures...")
+            os.system("python src/visualize.py")
+
         else:
-            print("❌ Invalid choice. Please enter a number between 0 and 5.")
+            print("❌ Invalid option.")
+
+        input("\nPress Enter to continue...")
 
 if __name__ == "__main__":
     main()

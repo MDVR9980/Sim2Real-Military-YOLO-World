@@ -2,8 +2,8 @@
 YAML Configuration Generator.
 
 This script generates the 'data.yaml' file required for YOLO training.
-It resolves absolute paths dynamically to prevent 'File Not Found' errors
-when moving the project between different machines (e.g., Laptop vs Lab PC).
+It dynamically resolves paths to the organized dataset to ensure
+compatibility across different environments.
 """
 
 import yaml
@@ -12,15 +12,18 @@ from pathlib import Path
 
 def create_data_yaml():
     """
-    Creates data.yaml pointing to the processed dataset with absolute paths.
+    Creates 'data.yaml' pointing to the organized dataset (Train/Val/Test).
     """
-    data_path = config.PROCESSED_DATA_DIR.resolve()
+    # The root path of the organized dataset
+    dataset_root = config.FINAL_DATASET_DIR.resolve()
     
     # Structure required by Ultralytics YOLO
+    # Using relative paths from the 'path' defined below
     yaml_content = {
-        'path': str(data_path),  # Absolute path to dataset root
-        'train': 'train/images', # Relative path to train images
-        'val': 'val/images',     # Relative path to val images
+        'path': str(dataset_root),  # Absolute path to dataset root
+        'train': 'train/images',    # Relative path
+        'val': 'val/images',        # Relative path
+        'test': 'test/images',      # Relative path
         'nc': len(config.CLASS_NAMES),
         'names': config.CLASS_NAMES
     }
@@ -31,7 +34,8 @@ def create_data_yaml():
         yaml.dump(yaml_content, f, sort_keys=False)
     
     print(f"✅ Configuration file created at: {yaml_file}")
-    print(f"   Dataset Root: {data_path}")
+    print(f"   dataset_root: {dataset_root}")
+    print(f"   Classes: {config.CLASS_NAMES}")
 
 if __name__ == '__main__':
     create_data_yaml()

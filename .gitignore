@@ -1,29 +1,85 @@
-# Python & Environment
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-venv/
-.env
-.DS_Store
 
-# Project Data & Results
-# Ignore the raw and processed datasets (too large)
-data/final_dataset_voc/
-data/processed_yolo/
-data/data.yaml
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Project Specific IGNORES ---
+# Ignore raw dataset provided by professor
+student_dataset/
+
+# Ignore processed data
+data/
 
 # Ignore large model weights
-*.pt
-models/pre_trained/
-models/fine_tuned/
-runs/
+models/*.pt
+models/*.onnx
 
-# Ignore training logs and temporary reports
+# Ignore training artifacts (keep reports/figures though)
 reports/runs/
 reports/evaluation/
-wandb/
 
 # IDE Settings
 .vscode/
 .idea/
-*.ipynb_checkpoints/
+
+# OS Specific
+.DS_Store
+Thumbs.db
