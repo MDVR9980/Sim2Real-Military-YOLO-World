@@ -44,7 +44,7 @@ Sim2Real-Military-YOLO-World/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/username/Sim2Real-Military-YOLO-World.git
+   git clone https://github.com/mdvr9980/Sim2Real-Military-YOLO-World.git
    cd Sim2Real-Military-YOLO-World
    ```
 
